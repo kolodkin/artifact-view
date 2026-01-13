@@ -55,6 +55,26 @@ You can trigger cleanup manually via GitHub Actions:
    - `artifact_path`: Target a specific path (e.g., `heroes-of-talisman/playwright-report`)
    - `dry_run`: Preview what would be deleted without making changes
 
+### Local Cleanup
+
+Run the cleanup script locally for testing or manual cleanup:
+
+```bash
+# Prerequisites: jq, git-filter-repo
+pip install git-filter-repo
+
+# Clone both branches
+git clone <repo-url> artifact-view && cd artifact-view
+git worktree add ../artifact-view-pages gh-pages
+
+# Run from gh-pages worktree
+cd ../artifact-view-pages
+../artifact-view/scripts/cleanup-artifacts.sh --help
+../artifact-view/scripts/cleanup-artifacts.sh --dry-run
+../artifact-view/scripts/cleanup-artifacts.sh
+git push origin gh-pages --force
+```
+
 ## Usage
 
 To deploy artifacts to this repository from another workflow:
