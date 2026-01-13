@@ -1,0 +1,181 @@
+name: Cleanup Old Artifacts
+
+on:
+  workflow_dispatch:
+    inputs:
+      artifact_path:
+        description: 'Path to artifact folders (x/y where run folders are x/y/{i})'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run - show what would be deleted without deleting'
+        required: false
+        type: boolean
+        default: false
+  schedule:
+    # Run daily at midnight UTC
+    - cron: '0 0 * * *'
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install git-filter-repo
+        run: |
+          pip install git-filter-repo
+
+      - name: Cleanup old artifacts
+        env:
+          INPUT_ARTIFACT_PATH: ${{ github.event.inputs.artifact_path || '' }}
+          INPUT_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: |
+          set -e
+
+          DEFAULT_KEEP=10
+
+          # Function to process a single artifact directory
+          process_artifact_dir() {
+            local artifact_path="$1"
+            local parent_dir=$(dirname "$artifact_path")
+            local config_file="${parent_dir}/config.json"
+            local keep_count=$DEFAULT_KEEP
+
+            # Read config if exists
+            if [ -f "$config_file" ]; then
+              configured_keep=$(jq -r '.keep // empty' "$config_file" 2>/dev/null || true)
+              if [ -n "$configured_keep" ] && [ "$configured_keep" -gt 0 ] 2>/dev/null; then
+                keep_count=$configured_keep
+                echo "Using configured keep count: $keep_count from $config_file"
+              fi
+            else
+              echo "No config found at $config_file, using default: $keep_count"
+            fi
+
+            # Get all numeric subdirectories, sorted numerically descending
+            local dirs_to_check="$artifact_path"
+            if [ ! -d "$dirs_to_check" ]; then
+              echo "Directory $dirs_to_check does not exist, skipping"
+              return
+            fi
+
+            # Find numeric folders and sort numerically
+            local all_runs=$(find "$dirs_to_check" -maxdepth 1 -mindepth 1 -type d -exec basename {} \; 2>/dev/null | grep -E '^[0-9]+$' | sort -n -r)
+
+            if [ -z "$all_runs" ]; then
+              echo "No numeric run folders found in $artifact_path"
+              return
+            fi
+
+            local total_count=$(echo "$all_runs" | wc -l | tr -d ' ')
+            echo "Found $total_count run folders in $artifact_path"
+
+            # Skip if we have fewer than keep_count
+            if [ "$total_count" -le "$keep_count" ]; then
+              echo "Total runs ($total_count) <= keep count ($keep_count), nothing to delete"
+              return
+            fi
+
+            # Get folders to delete (all except the last keep_count)
+            local to_delete=$(echo "$all_runs" | tail -n +$((keep_count + 1)))
+            local delete_count=$(echo "$to_delete" | wc -l | tr -d ' ')
+
+            echo "Will delete $delete_count old run folders, keeping newest $keep_count"
+
+            for run_num in $to_delete; do
+              local full_path="${artifact_path}/${run_num}"
+              echo "  - $full_path"
+
+              if [ "$INPUT_DRY_RUN" != "true" ]; then
+                # Remove from working tree
+                rm -rf "$full_path"
+
+                # Track path for git-filter-repo
+                echo "$full_path" >> /tmp/paths_to_filter.txt
+              fi
+            done
+          }
+
+          # Initialize paths file
+          > /tmp/paths_to_filter.txt
+
+          # If specific path provided, process only that
+          if [ -n "$INPUT_ARTIFACT_PATH" ]; then
+            echo "Processing specified path: $INPUT_ARTIFACT_PATH"
+            process_artifact_dir "$INPUT_ARTIFACT_PATH"
+          else
+            # Auto-discover: find all directories that contain numeric subdirectories
+            echo "Auto-discovering artifact directories..."
+
+            # Find potential artifact paths (directories containing numeric subdirs)
+            for potential_parent in $(find . -mindepth 2 -maxdepth 2 -type d -name '[0-9]*' 2>/dev/null | xargs -I {} dirname {} | sort -u); do
+              # Remove leading ./
+              clean_path="${potential_parent#./}"
+              echo "Discovered artifact path: $clean_path"
+              process_artifact_dir "$clean_path"
+            done
+          fi
+
+          if [ "$INPUT_DRY_RUN" = "true" ]; then
+            echo ""
+            echo "=== DRY RUN - No changes made ==="
+            exit 0
+          fi
+
+          # Check if there are paths to filter
+          if [ ! -s /tmp/paths_to_filter.txt ]; then
+            echo "No paths to clean from git history"
+            exit 0
+          fi
+
+          echo ""
+          echo "=== Removing deleted paths from git history ==="
+
+          # Commit the deletions first
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: cleanup old artifact runs"
+          fi
+
+          # Use git-filter-repo to remove paths from history
+          # Create paths file in the format git-filter-repo expects
+          echo "Filtering the following paths from history:"
+          cat /tmp/paths_to_filter.txt
+
+          # git-filter-repo needs to work with paths relative to repo root
+          # Use --invert-paths with --paths-from-file to remove specific paths
+          git filter-repo --invert-paths --paths-from-file /tmp/paths_to_filter.txt --force
+
+          echo ""
+          echo "=== Pushing cleaned history ==="
+          git push origin gh-pages --force
+
+          echo ""
+          echo "=== Cleanup complete ==="
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Artifact Cleanup Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            echo "**Mode:** Dry Run (no changes made)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "**Mode:** Live Run" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "See job logs for details." >> $GITHUB_STEP_SUMMARY
