@@ -23,25 +23,17 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout main (for scripts)
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          path: main
-
       - name: Checkout gh-pages branch
         uses: actions/checkout@v4
         with:
           ref: gh-pages
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-          path: gh-pages
 
       - name: Install git-filter-repo
         run: pip install git-filter-repo
 
       - name: Run cleanup script
-        working-directory: gh-pages
         env:
           GIT_USER_NAME: github-actions[bot]
           GIT_USER_EMAIL: github-actions[bot]@users.noreply.github.com
@@ -53,13 +45,11 @@ jobs:
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             ARGS="$ARGS --dry-run"
           fi
-          ../main/scripts/cleanup-artifacts.sh $ARGS
+          ./scripts/cleanup-artifacts.sh $ARGS
 
       - name: Push changes
         if: ${{ github.event.inputs.dry_run != 'true' }}
-        working-directory: gh-pages
-        run: |
-          git push origin gh-pages --force || echo "Nothing to push"
+        run: git push origin gh-pages --force || echo "Nothing to push"
 
       - name: Summary
         if: always()

@@ -63,15 +63,14 @@ Run the cleanup script locally for testing or manual cleanup:
 # Prerequisites: jq, git-filter-repo
 pip install git-filter-repo
 
-# Clone both branches
-git clone <repo-url> artifact-view && cd artifact-view
-git worktree add ../artifact-view-pages gh-pages
+# Checkout gh-pages branch
+git checkout gh-pages
 
-# Run from gh-pages worktree
-cd ../artifact-view-pages
-../artifact-view/scripts/cleanup-artifacts.sh --help
-../artifact-view/scripts/cleanup-artifacts.sh --dry-run
-../artifact-view/scripts/cleanup-artifacts.sh
+# Run cleanup
+./scripts/cleanup-artifacts.sh --help
+./scripts/cleanup-artifacts.sh --dry-run
+./scripts/cleanup-artifacts.sh --keep 5              # override keep count
+./scripts/cleanup-artifacts.sh
 git push origin gh-pages --force
 ```
 
@@ -93,4 +92,4 @@ To deploy artifacts to this repository from another workflow:
 ## Branches
 
 - `main`: Contains workflow definitions and documentation
-- `gh-pages`: Hosts the static artifacts (served via GitHub Pages)
+- `gh-pages`: Hosts the static artifacts, cleanup script, and config (served via GitHub Pages)
