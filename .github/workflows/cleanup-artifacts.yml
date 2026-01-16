@@ -45,7 +45,7 @@ jobs:
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             ARGS="$ARGS --dry-run"
           fi
-          ./scripts/cleanup-artifacts.sh $ARGS
+          ./scripts/cleanup-artifacts.sh $ARGS 2>&1 | tee cleanup-output.txt
 
       - name: Push changes
         if: ${{ github.event.inputs.dry_run != 'true' }}
@@ -62,4 +62,11 @@ jobs:
             echo "**Mode:** Live Run" >> $GITHUB_STEP_SUMMARY
           fi
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "See job logs for details." >> $GITHUB_STEP_SUMMARY
+          if [ -f cleanup-output.txt ]; then
+            echo "### Output" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            cat cleanup-output.txt >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          else
+            echo "No output captured." >> $GITHUB_STEP_SUMMARY
+          fi
