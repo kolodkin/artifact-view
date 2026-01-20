@@ -1,0 +1,452 @@
+<testsuites id="" name="" tests="48" failures="10" skipped="0" errors="0" time="128.51953300000002">
+<testsuite name="basic_flow.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="chromium" tests="1" failures="1" skipped="0" time="6.376" errors="0">
+<testcase name="basic game flow" classname="basic_flow.spec.js" time="6.376">
+<failure message="basic_flow.spec.js:269:1 basic game flow" type="FAILURE">
+<![CDATA[  [chromium] › basic_flow.spec.js:269:1 › basic game flow ──────────────────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('[data-player="player"]')
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('[data-player="player"]')
+
+
+      41 |
+      42 |   // Validate player div is visible
+    > 43 |   await expect(playerDiv).toBeVisible();
+         |                           ^
+      44 |
+      45 |   // Expand player cards if minimized (click + button to show full cards with images)
+      46 |   const expandButton = page.getByRole("button", { name: "Expand all players" });
+        at validatePlayerCharacters (/home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/basic_flow.spec.js:43:27)
+        at /home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/basic_flow.spec.js:276:9
+
+    attachment #3: player-connection-message (text/plain) ──────────────────────────────────────────
+    התחברת למשחק
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/basic_flow-basic-game-flow-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/basic_flow-basic-game-flow-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="disconnected.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="chromium" tests="1" failures="1" skipped="0" time="1.656" errors="0">
+<testcase name="disconnected player overlay in players menu" classname="disconnected.spec.js" time="1.656">
+<failure message="disconnected.spec.js:3:1 disconnected player overlay in players menu" type="FAILURE">
+<![CDATA[  [chromium] › disconnected.spec.js:3:1 › disconnected player overlay in players menu ──────────────
+
+    TimeoutError: page.waitForSelector: Timeout 1000ms exceeded.
+    Call log:
+      - waiting for locator('[data-player="player1"]') to be visible
+
+
+      11 |
+      12 |   // Wait for player1 to appear in players menu
+    > 13 |   await page.waitForSelector('[data-player="player1"]', { timeout: TIMEOUT });
+         |              ^
+      14 |   await screenshot(page, "player1-joined");
+      15 |
+      16 |   // Player 2 joins in a new session
+        at /home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/disconnected.spec.js:13:14
+
+    attachment #1: player1-connection-message (text/plain) ─────────────────────────────────────────
+    התחברת למשחק
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/disconnected-disconnected-player-overlay-in-players-menu-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/disconnected-disconnected-player-overlay-in-players-menu-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="home.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="chromium" tests="4" failures="0" skipped="0" time="3.426" errors="0">
+<testcase name="should show error toast when username is empty" classname="home.spec.js" time="1.042">
+</testcase>
+<testcase name="should show error toast when username is only whitespace" classname="home.spec.js" time="0.907">
+</testcase>
+<testcase name="should allow joining game with valid username" classname="home.spec.js" time="0.753">
+</testcase>
+<testcase name="should trim whitespace from username when joining" classname="home.spec.js" time="0.724">
+</testcase>
+</testsuite>
+<testsuite name="minimum_players.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="chromium" tests="2" failures="0" skipped="0" time="1.145" errors="0">
+<testcase name="minimum player overlay appears with single player" classname="minimum_players.spec.js" time="0.601">
+</testcase>
+<testcase name="minimum player overlay not present with two players" classname="minimum_players.spec.js" time="0.544">
+</testcase>
+</testsuite>
+<testsuite name="players_menu.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="chromium" tests="1" failures="1" skipped="0" time="5.539" errors="0">
+<testcase name="players menu minified by default with global toggle" classname="players_menu.spec.js" time="5.539">
+<failure message="players_menu.spec.js:3:1 players menu minified by default with global toggle" type="FAILURE">
+<![CDATA[  [chromium] › players_menu.spec.js:3:1 › players menu minified by default with global toggle ──────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('[data-player="player"]')
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('[data-player="player"]')
+
+
+      16 |   // Wait for player div to be visible
+      17 |   const playerDiv = page.locator('[data-player="player"]');
+    > 18 |   await expect(playerDiv).toBeVisible();
+         |                           ^
+      19 |
+      20 |   // Find the global toggle button in the players header
+      21 |   const playersHeader = page.locator('[class*="players-header"]');
+        at /home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/players_menu.spec.js:18:27
+
+    attachment #1: player-connection-message (text/plain) ──────────────────────────────────────────
+    התחברת למשחק
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/players_menu-players-menu--5dd88--default-with-global-toggle-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/players_menu-players-menu--5dd88--default-with-global-toggle-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="shared_area.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="chromium" tests="2" failures="1" skipped="0" time="6.949" errors="0">
+<testcase name="shared area dynamic alignment - character selection stage" classname="shared_area.spec.js" time="5.402">
+<failure message="shared_area.spec.js:3:1 shared area dynamic alignment - character selection stage" type="FAILURE">
+<![CDATA[  [chromium] › shared_area.spec.js:3:1 › shared area dynamic alignment - character selection stage ─
+
+    TimeoutError: page.waitForSelector: Timeout 5000ms exceeded.
+    Call log:
+      - waiting for locator('h2:has-text("בחר דמות")') to be visible
+
+
+      10 |   // Navigate directly to the game
+      11 |   await page.goto(`${FRONTEND_URL}/games/${gameName}/${playerName}`);
+    > 12 |   await page.waitForSelector('h2:has-text("בחר דמות")', { timeout: 5000 });
+         |              ^
+      13 |   await screenshot(page, "character-select-loaded");
+      14 |
+      15 |   // Test 1: Narrow viewport - should align to start with scroll
+        at /home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/shared_area.spec.js:12:14
+
+    Error Context: ../test-results/shared_area-shared-area-dy-4a74f---character-selection-stage-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/shared_area-shared-area-dy-4a74f---character-selection-stage-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="shared area dynamic alignment - opponent selection stage" classname="shared_area.spec.js" time="1.547">
+</testcase>
+</testsuite>
+<testsuite name="stage_ability_selection.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="chromium" tests="3" failures="0" skipped="0" time="3.381" errors="0">
+<testcase name="ability_selection stage - knight (BATTLE_HOWL) skips to opponent_selection" classname="stage_ability_selection.spec.js" time="1.174">
+</testcase>
+<testcase name="ability_selection stage - archer (BOUNCING_ARROW) skips to opponent_selection" classname="stage_ability_selection.spec.js" time="1.14">
+</testcase>
+<testcase name="ability_selection stage - mage (FREEZE) goes to ability_opponent_selection" classname="stage_ability_selection.spec.js" time="1.067">
+</testcase>
+</testsuite>
+<testsuite name="stage_battle.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="chromium" tests="5" failures="0" skipped="0" time="15.272" errors="0">
+<testcase name="battle stage - player 1 wins" classname="stage_battle.spec.js" time="3.08">
+</testcase>
+<testcase name="battle stage - player 2 wins" classname="stage_battle.spec.js" time="3.018">
+</testcase>
+<testcase name="battle stage - draw with reroll" classname="stage_battle.spec.js" time="3.076">
+</testcase>
+<testcase name="battle stage - reroll effect after loss" classname="stage_battle.spec.js" time="3.056">
+</testcase>
+<testcase name="battle stage - draw with attack bonus effect" classname="stage_battle.spec.js" time="3.042">
+</testcase>
+</testsuite>
+<testsuite name="stage_charachter_select.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="chromium" tests="5" failures="1" skipped="0" time="9.672" errors="0">
+<testcase name="character_select stage - knight not alive" classname="stage_charachter_select.spec.js" time="0.908">
+</testcase>
+<testcase name="character_select stage - mage not alive" classname="stage_charachter_select.spec.js" time="0.894">
+</testcase>
+<testcase name="character_select stage - archer not alive" classname="stage_charachter_select.spec.js" time="0.857">
+</testcase>
+<testcase name="character_select stage - knight has skip_turn effect" classname="stage_charachter_select.spec.js" time="0.858">
+</testcase>
+<testcase name="character_select stage - skip_turn effect removed after character selection" classname="stage_charachter_select.spec.js" time="6.155">
+<failure message="stage_charachter_select.spec.js:129:1 character_select stage - skip_turn effect removed after character selection" type="FAILURE">
+<![CDATA[  [chromium] › stage_charachter_select.spec.js:129:1 › character_select stage - skip_turn effect removed after character selection 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('[data-shared-area-active="true"]').locator('[data-ability="freeze"]')
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('[data-shared-area-active="true"]').locator('[data-ability="freeze"]')
+
+
+      148 |   const sharedArea = page.locator('[data-shared-area-active="true"]');
+      149 |   const freezeAbility = sharedArea.locator('[data-ability="freeze"]');
+    > 150 |   await expect(freezeAbility).toBeVisible();
+          |                               ^
+      151 |
+      152 |   // Verify knight no longer has skip_turn effect (effect was removed)
+      153 |   // The data-effects attribute should no longer contain skip_turn
+        at /home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/stage_charachter_select.spec.js:150:31
+
+    Error Context: ../test-results/stage_charachter_select-ch-e967f-d-after-character-selection-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/stage_charachter_select-ch-e967f-d-after-character-selection-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="basic_flow.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="mobile-landscape" tests="1" failures="1" skipped="0" time="6.932" errors="0">
+<testcase name="basic game flow" classname="basic_flow.spec.js" time="6.932">
+<failure message="basic_flow.spec.js:269:1 basic game flow" type="FAILURE">
+<![CDATA[  [mobile-landscape] › basic_flow.spec.js:269:1 › basic game flow ──────────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('[data-player="player"]')
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('[data-player="player"]')
+
+
+      41 |
+      42 |   // Validate player div is visible
+    > 43 |   await expect(playerDiv).toBeVisible();
+         |                           ^
+      44 |
+      45 |   // Expand player cards if minimized (click + button to show full cards with images)
+      46 |   const expandButton = page.getByRole("button", { name: "Expand all players" });
+        at validatePlayerCharacters (/home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/basic_flow.spec.js:43:27)
+        at /home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/basic_flow.spec.js:276:9
+
+    attachment #3: player-connection-message (text/plain) ──────────────────────────────────────────
+    התחברת למשחק
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/basic_flow-basic-game-flow-mobile-landscape/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/basic_flow-basic-game-flow-mobile-landscape/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="disconnected.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="mobile-landscape" tests="1" failures="1" skipped="0" time="1.589" errors="0">
+<testcase name="disconnected player overlay in players menu" classname="disconnected.spec.js" time="1.589">
+<failure message="disconnected.spec.js:3:1 disconnected player overlay in players menu" type="FAILURE">
+<![CDATA[  [mobile-landscape] › disconnected.spec.js:3:1 › disconnected player overlay in players menu ──────
+
+    TimeoutError: page.waitForSelector: Timeout 1000ms exceeded.
+    Call log:
+      - waiting for locator('[data-player="player1"]') to be visible
+
+
+      11 |
+      12 |   // Wait for player1 to appear in players menu
+    > 13 |   await page.waitForSelector('[data-player="player1"]', { timeout: TIMEOUT });
+         |              ^
+      14 |   await screenshot(page, "player1-joined");
+      15 |
+      16 |   // Player 2 joins in a new session
+        at /home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/disconnected.spec.js:13:14
+
+    attachment #1: player1-connection-message (text/plain) ─────────────────────────────────────────
+    התחברת למשחק
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/disconnected-disconnected-player-overlay-in-players-menu-mobile-landscape/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/disconnected-disconnected-player-overlay-in-players-menu-mobile-landscape/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="home.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="mobile-landscape" tests="4" failures="0" skipped="0" time="5.28" errors="0">
+<testcase name="should show error toast when username is empty" classname="home.spec.js" time="1.561">
+</testcase>
+<testcase name="should show error toast when username is only whitespace" classname="home.spec.js" time="1.534">
+</testcase>
+<testcase name="should allow joining game with valid username" classname="home.spec.js" time="1.041">
+</testcase>
+<testcase name="should trim whitespace from username when joining" classname="home.spec.js" time="1.144">
+</testcase>
+</testsuite>
+<testsuite name="minimum_players.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="mobile-landscape" tests="2" failures="0" skipped="0" time="1.289" errors="0">
+<testcase name="minimum player overlay appears with single player" classname="minimum_players.spec.js" time="0.672">
+</testcase>
+<testcase name="minimum player overlay not present with two players" classname="minimum_players.spec.js" time="0.617">
+</testcase>
+</testsuite>
+<testsuite name="players_menu.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="mobile-landscape" tests="1" failures="1" skipped="0" time="5.538" errors="0">
+<testcase name="players menu minified by default with global toggle" classname="players_menu.spec.js" time="5.538">
+<failure message="players_menu.spec.js:3:1 players menu minified by default with global toggle" type="FAILURE">
+<![CDATA[  [mobile-landscape] › players_menu.spec.js:3:1 › players menu minified by default with global toggle 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('[data-player="player"]')
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('[data-player="player"]')
+
+
+      16 |   // Wait for player div to be visible
+      17 |   const playerDiv = page.locator('[data-player="player"]');
+    > 18 |   await expect(playerDiv).toBeVisible();
+         |                           ^
+      19 |
+      20 |   // Find the global toggle button in the players header
+      21 |   const playersHeader = page.locator('[class*="players-header"]');
+        at /home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/players_menu.spec.js:18:27
+
+    attachment #1: player-connection-message (text/plain) ──────────────────────────────────────────
+    התחברת למשחק
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/players_menu-players-menu--5dd88--default-with-global-toggle-mobile-landscape/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/players_menu-players-menu--5dd88--default-with-global-toggle-mobile-landscape/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="shared_area.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="mobile-landscape" tests="2" failures="1" skipped="0" time="7.461" errors="0">
+<testcase name="shared area dynamic alignment - character selection stage" classname="shared_area.spec.js" time="5.426">
+<failure message="shared_area.spec.js:3:1 shared area dynamic alignment - character selection stage" type="FAILURE">
+<![CDATA[  [mobile-landscape] › shared_area.spec.js:3:1 › shared area dynamic alignment - character selection stage 
+
+    TimeoutError: page.waitForSelector: Timeout 5000ms exceeded.
+    Call log:
+      - waiting for locator('h2:has-text("בחר דמות")') to be visible
+
+
+      10 |   // Navigate directly to the game
+      11 |   await page.goto(`${FRONTEND_URL}/games/${gameName}/${playerName}`);
+    > 12 |   await page.waitForSelector('h2:has-text("בחר דמות")', { timeout: 5000 });
+         |              ^
+      13 |   await screenshot(page, "character-select-loaded");
+      14 |
+      15 |   // Test 1: Narrow viewport - should align to start with scroll
+        at /home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/shared_area.spec.js:12:14
+
+    Error Context: ../test-results/shared_area-shared-area-dy-4a74f---character-selection-stage-mobile-landscape/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/shared_area-shared-area-dy-4a74f---character-selection-stage-mobile-landscape/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="shared area dynamic alignment - opponent selection stage" classname="shared_area.spec.js" time="2.035">
+</testcase>
+</testsuite>
+<testsuite name="stage_ability_selection.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="mobile-landscape" tests="3" failures="0" skipped="0" time="3.73" errors="0">
+<testcase name="ability_selection stage - knight (BATTLE_HOWL) skips to opponent_selection" classname="stage_ability_selection.spec.js" time="1.223">
+</testcase>
+<testcase name="ability_selection stage - archer (BOUNCING_ARROW) skips to opponent_selection" classname="stage_ability_selection.spec.js" time="1.228">
+</testcase>
+<testcase name="ability_selection stage - mage (FREEZE) goes to ability_opponent_selection" classname="stage_ability_selection.spec.js" time="1.279">
+</testcase>
+</testsuite>
+<testsuite name="stage_battle.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="mobile-landscape" tests="5" failures="0" skipped="0" time="15.572" errors="0">
+<testcase name="battle stage - player 1 wins" classname="stage_battle.spec.js" time="3.098">
+</testcase>
+<testcase name="battle stage - player 2 wins" classname="stage_battle.spec.js" time="3.111">
+</testcase>
+<testcase name="battle stage - draw with reroll" classname="stage_battle.spec.js" time="3.021">
+</testcase>
+<testcase name="battle stage - reroll effect after loss" classname="stage_battle.spec.js" time="3.233">
+</testcase>
+<testcase name="battle stage - draw with attack bonus effect" classname="stage_battle.spec.js" time="3.109">
+</testcase>
+</testsuite>
+<testsuite name="stage_charachter_select.spec.js" timestamp="2026-01-20T06:05:39.355Z" hostname="mobile-landscape" tests="5" failures="1" skipped="0" time="10.139" errors="0">
+<testcase name="character_select stage - knight not alive" classname="stage_charachter_select.spec.js" time="0.988">
+</testcase>
+<testcase name="character_select stage - mage not alive" classname="stage_charachter_select.spec.js" time="1.012">
+</testcase>
+<testcase name="character_select stage - archer not alive" classname="stage_charachter_select.spec.js" time="0.989">
+</testcase>
+<testcase name="character_select stage - knight has skip_turn effect" classname="stage_charachter_select.spec.js" time="0.993">
+</testcase>
+<testcase name="character_select stage - skip_turn effect removed after character selection" classname="stage_charachter_select.spec.js" time="6.157">
+<failure message="stage_charachter_select.spec.js:129:1 character_select stage - skip_turn effect removed after character selection" type="FAILURE">
+<![CDATA[  [mobile-landscape] › stage_charachter_select.spec.js:129:1 › character_select stage - skip_turn effect removed after character selection 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('[data-shared-area-active="true"]').locator('[data-ability="freeze"]')
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('[data-shared-area-active="true"]').locator('[data-ability="freeze"]')
+
+
+      148 |   const sharedArea = page.locator('[data-shared-area-active="true"]');
+      149 |   const freezeAbility = sharedArea.locator('[data-ability="freeze"]');
+    > 150 |   await expect(freezeAbility).toBeVisible();
+          |                               ^
+      151 |
+      152 |   // Verify knight no longer has skip_turn effect (effect was removed)
+      153 |   // The data-effects attribute should no longer contain skip_turn
+        at /home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/stage_charachter_select.spec.js:150:31
+
+    Error Context: ../test-results/stage_charachter_select-ch-e967f-d-after-character-selection-mobile-landscape/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/stage_charachter_select-ch-e967f-d-after-character-selection-mobile-landscape/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
