@@ -1,0 +1,146 @@
+<testsuites id="" name="" tests="52" failures="0" skipped="0" errors="0" time="111.320475">
+<testsuite name="basic_flow.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="chromium" tests="1" failures="0" skipped="0" time="10.769" errors="0">
+<testcase name="basic game flow" classname="basic_flow.spec.js" time="10.769">
+</testcase>
+</testsuite>
+<testsuite name="disconnected.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.829" errors="0">
+<testcase name="disconnected player overlay in players menu" classname="disconnected.spec.js" time="1.829">
+</testcase>
+</testsuite>
+<testsuite name="home.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="chromium" tests="4" failures="0" skipped="0" time="3.158" errors="0">
+<testcase name="should show error toast when username is empty" classname="home.spec.js" time="0.883">
+</testcase>
+<testcase name="should show error toast when username is only whitespace" classname="home.spec.js" time="0.828">
+</testcase>
+<testcase name="should allow joining game with valid username" classname="home.spec.js" time="0.737">
+</testcase>
+<testcase name="should trim whitespace from username when joining" classname="home.spec.js" time="0.71">
+</testcase>
+</testsuite>
+<testsuite name="minimum_players.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="chromium" tests="2" failures="0" skipped="0" time="1.072" errors="0">
+<testcase name="minimum player overlay appears with single player" classname="minimum_players.spec.js" time="0.547">
+</testcase>
+<testcase name="minimum player overlay not present with two players" classname="minimum_players.spec.js" time="0.525">
+</testcase>
+</testsuite>
+<testsuite name="players_menu.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.821" errors="0">
+<testcase name="players menu minified by default with global toggle" classname="players_menu.spec.js" time="1.821">
+</testcase>
+</testsuite>
+<testsuite name="shared_area.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="chromium" tests="2" failures="0" skipped="0" time="2.627" errors="0">
+<testcase name="shared area dynamic alignment - character selection stage" classname="shared_area.spec.js" time="1.29">
+</testcase>
+<testcase name="shared area dynamic alignment - opponent selection stage" classname="shared_area.spec.js" time="1.337">
+</testcase>
+</testsuite>
+<testsuite name="stage_ability_selection.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="chromium" tests="3" failures="0" skipped="0" time="3.123" errors="0">
+<testcase name="ability_selection stage - knight (BATTLE_HOWL) skips to opponent_selection" classname="stage_ability_selection.spec.js" time="0.999">
+</testcase>
+<testcase name="ability_selection stage - archer (BOUNCING_ARROW) skips to opponent_selection" classname="stage_ability_selection.spec.js" time="1.085">
+</testcase>
+<testcase name="ability_selection stage - mage (FREEZE) goes to ability_opponent_selection" classname="stage_ability_selection.spec.js" time="1.039">
+</testcase>
+</testsuite>
+<testsuite name="stage_battle.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="chromium" tests="5" failures="0" skipped="0" time="14.805" errors="0">
+<testcase name="battle stage - player 1 wins" classname="stage_battle.spec.js" time="2.937">
+</testcase>
+<testcase name="battle stage - player 2 wins" classname="stage_battle.spec.js" time="2.953">
+</testcase>
+<testcase name="battle stage - draw with reroll" classname="stage_battle.spec.js" time="2.911">
+</testcase>
+<testcase name="battle stage - reroll effect after loss" classname="stage_battle.spec.js" time="3.034">
+</testcase>
+<testcase name="battle stage - draw with attack bonus effect" classname="stage_battle.spec.js" time="2.97">
+</testcase>
+</testsuite>
+<testsuite name="stage_card_draw.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="chromium" tests="2" failures="0" skipped="0" time="3.571" errors="0">
+<testcase name="card_draw stage - knight draws metal_armor successfully" classname="stage_card_draw.spec.js" time="1.69">
+</testcase>
+<testcase name="card_draw stage - archer draws sacred_sword (restricted)" classname="stage_card_draw.spec.js" time="1.881">
+</testcase>
+</testsuite>
+<testsuite name="stage_charachter_select.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="chromium" tests="5" failures="0" skipped="0" time="4.521" errors="0">
+<testcase name="character_select stage - knight not alive" classname="stage_charachter_select.spec.js" time="0.911">
+</testcase>
+<testcase name="character_select stage - mage not alive" classname="stage_charachter_select.spec.js" time="0.929">
+</testcase>
+<testcase name="character_select stage - archer not alive" classname="stage_charachter_select.spec.js" time="0.894">
+</testcase>
+<testcase name="character_select stage - knight has skip_turn effect" classname="stage_charachter_select.spec.js" time="0.929">
+</testcase>
+<testcase name="character_select stage - skip_turn effect removed after character selection" classname="stage_charachter_select.spec.js" time="0.858">
+</testcase>
+</testsuite>
+<testsuite name="basic_flow.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="mobile-landscape" tests="1" failures="0" skipped="0" time="12.992" errors="0">
+<testcase name="basic game flow" classname="basic_flow.spec.js" time="12.992">
+</testcase>
+</testsuite>
+<testsuite name="disconnected.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="mobile-landscape" tests="1" failures="0" skipped="0" time="1.927" errors="0">
+<testcase name="disconnected player overlay in players menu" classname="disconnected.spec.js" time="1.927">
+</testcase>
+</testsuite>
+<testsuite name="home.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="mobile-landscape" tests="4" failures="0" skipped="0" time="4.86" errors="0">
+<testcase name="should show error toast when username is empty" classname="home.spec.js" time="1.364">
+</testcase>
+<testcase name="should show error toast when username is only whitespace" classname="home.spec.js" time="1.402">
+</testcase>
+<testcase name="should allow joining game with valid username" classname="home.spec.js" time="1.06">
+</testcase>
+<testcase name="should trim whitespace from username when joining" classname="home.spec.js" time="1.034">
+</testcase>
+</testsuite>
+<testsuite name="minimum_players.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="mobile-landscape" tests="2" failures="0" skipped="0" time="1.169" errors="0">
+<testcase name="minimum player overlay appears with single player" classname="minimum_players.spec.js" time="0.582">
+</testcase>
+<testcase name="minimum player overlay not present with two players" classname="minimum_players.spec.js" time="0.587">
+</testcase>
+</testsuite>
+<testsuite name="players_menu.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="mobile-landscape" tests="1" failures="0" skipped="0" time="2.067" errors="0">
+<testcase name="players menu minified by default with global toggle" classname="players_menu.spec.js" time="2.067">
+</testcase>
+</testsuite>
+<testsuite name="shared_area.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="mobile-landscape" tests="2" failures="0" skipped="0" time="3.698" errors="0">
+<testcase name="shared area dynamic alignment - character selection stage" classname="shared_area.spec.js" time="1.822">
+</testcase>
+<testcase name="shared area dynamic alignment - opponent selection stage" classname="shared_area.spec.js" time="1.876">
+</testcase>
+</testsuite>
+<testsuite name="stage_ability_selection.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="mobile-landscape" tests="3" failures="0" skipped="0" time="3.412" errors="0">
+<testcase name="ability_selection stage - knight (BATTLE_HOWL) skips to opponent_selection" classname="stage_ability_selection.spec.js" time="1.131">
+</testcase>
+<testcase name="ability_selection stage - archer (BOUNCING_ARROW) skips to opponent_selection" classname="stage_ability_selection.spec.js" time="1.148">
+</testcase>
+<testcase name="ability_selection stage - mage (FREEZE) goes to ability_opponent_selection" classname="stage_ability_selection.spec.js" time="1.133">
+</testcase>
+</testsuite>
+<testsuite name="stage_battle.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="mobile-landscape" tests="5" failures="0" skipped="0" time="14.988" errors="0">
+<testcase name="battle stage - player 1 wins" classname="stage_battle.spec.js" time="2.96">
+</testcase>
+<testcase name="battle stage - player 2 wins" classname="stage_battle.spec.js" time="2.988">
+</testcase>
+<testcase name="battle stage - draw with reroll" classname="stage_battle.spec.js" time="2.918">
+</testcase>
+<testcase name="battle stage - reroll effect after loss" classname="stage_battle.spec.js" time="3.075">
+</testcase>
+<testcase name="battle stage - draw with attack bonus effect" classname="stage_battle.spec.js" time="3.047">
+</testcase>
+</testsuite>
+<testsuite name="stage_card_draw.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="mobile-landscape" tests="2" failures="0" skipped="0" time="2.572" errors="0">
+<testcase name="card_draw stage - knight draws metal_armor successfully" classname="stage_card_draw.spec.js" time="1.252">
+</testcase>
+<testcase name="card_draw stage - archer draws sacred_sword (restricted)" classname="stage_card_draw.spec.js" time="1.32">
+</testcase>
+</testsuite>
+<testsuite name="stage_charachter_select.spec.js" timestamp="2026-01-23T09:04:38.208Z" hostname="mobile-landscape" tests="5" failures="0" skipped="0" time="4.999" errors="0">
+<testcase name="character_select stage - knight not alive" classname="stage_charachter_select.spec.js" time="1.043">
+</testcase>
+<testcase name="character_select stage - mage not alive" classname="stage_charachter_select.spec.js" time="1.019">
+</testcase>
+<testcase name="character_select stage - archer not alive" classname="stage_charachter_select.spec.js" time="0.992">
+</testcase>
+<testcase name="character_select stage - knight has skip_turn effect" classname="stage_charachter_select.spec.js" time="0.999">
+</testcase>
+<testcase name="character_select stage - skip_turn effect removed after character selection" classname="stage_charachter_select.spec.js" time="0.946">
+</testcase>
+</testsuite>
+</testsuites>
