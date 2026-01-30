@@ -1,0 +1,310 @@
+<testsuites id="" name="" tests="64" failures="4" skipped="0" errors="0" time="73.694118">
+<testsuite name="basic_flow.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="chromium" tests="1" failures="0" skipped="0" time="10.265" errors="0">
+<testcase name="basic game flow" classname="basic_flow.spec.js" time="10.265">
+</testcase>
+</testsuite>
+<testsuite name="disconnected.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="chromium" tests="1" failures="0" skipped="0" time="2.153" errors="0">
+<testcase name="disconnected player overlay in players menu" classname="disconnected.spec.js" time="2.153">
+</testcase>
+</testsuite>
+<testsuite name="home.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="chromium" tests="4" failures="0" skipped="0" time="2.992" errors="0">
+<testcase name="should show error toast when username is empty" classname="home.spec.js" time="0.794">
+</testcase>
+<testcase name="should show error toast when username is only whitespace" classname="home.spec.js" time="0.803">
+</testcase>
+<testcase name="should allow joining game with valid username" classname="home.spec.js" time="0.698">
+</testcase>
+<testcase name="should trim whitespace from username when joining" classname="home.spec.js" time="0.697">
+</testcase>
+</testsuite>
+<testsuite name="minimum_players.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="chromium" tests="2" failures="0" skipped="0" time="0.907" errors="0">
+<testcase name="minimum player overlay appears with single player" classname="minimum_players.spec.js" time="0.422">
+</testcase>
+<testcase name="minimum player overlay not present with two players" classname="minimum_players.spec.js" time="0.485">
+</testcase>
+</testsuite>
+<testsuite name="players_menu.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.652" errors="0">
+<testcase name="players menu minified by default with global toggle" classname="players_menu.spec.js" time="1.652">
+</testcase>
+</testsuite>
+<testsuite name="shared_area.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="chromium" tests="2" failures="0" skipped="0" time="2.313" errors="0">
+<testcase name="shared area dynamic alignment - character selection stage" classname="shared_area.spec.js" time="1.111">
+</testcase>
+<testcase name="shared area dynamic alignment - opponent selection stage" classname="shared_area.spec.js" time="1.202">
+</testcase>
+</testsuite>
+<testsuite name="stage_ability_selection.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="chromium" tests="3" failures="0" skipped="0" time="3.17" errors="0">
+<testcase name="ability_selection stage - knight (BATTLE_HOWL) skips to opponent_selection" classname="stage_ability_selection.spec.js" time="1.066">
+</testcase>
+<testcase name="ability_selection stage - archer (BOUNCING_ARROW) skips to opponent_selection" classname="stage_ability_selection.spec.js" time="1.063">
+</testcase>
+<testcase name="ability_selection stage - mage (FREEZE) goes to ability_opponent_selection" classname="stage_ability_selection.spec.js" time="1.041">
+</testcase>
+</testsuite>
+<testsuite name="stage_battle.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="chromium" tests="5" failures="0" skipped="0" time="15.305" errors="0">
+<testcase name="battle stage - player 1 wins" classname="stage_battle.spec.js" time="3.184">
+</testcase>
+<testcase name="battle stage - player 2 wins" classname="stage_battle.spec.js" time="2.857">
+</testcase>
+<testcase name="battle stage - draw with reroll" classname="stage_battle.spec.js" time="3.054">
+</testcase>
+<testcase name="battle stage - reroll effect after loss" classname="stage_battle.spec.js" time="3.057">
+</testcase>
+<testcase name="battle stage - draw with attack bonus effect" classname="stage_battle.spec.js" time="3.153">
+</testcase>
+</testsuite>
+<testsuite name="stage_card_draw.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="chromium" tests="4" failures="0" skipped="0" time="4.695" errors="0">
+<testcase name="card_draw stage - knight draws metal_armor successfully" classname="stage_card_draw.spec.js" time="0.992">
+</testcase>
+<testcase name="card_draw stage - archer draws sacred_sword (restricted)" classname="stage_card_draw.spec.js" time="1.221">
+</testcase>
+<testcase name="card_draw stage - knight draws golden_apple and heals" classname="stage_card_draw.spec.js" time="1.21">
+</testcase>
+<testcase name="card_draw stage - knight at max health draws golden_apple (no overheal)" classname="stage_card_draw.spec.js" time="1.272">
+</testcase>
+</testsuite>
+<testsuite name="stage_charachter_select.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="chromium" tests="7" failures="0" skipped="0" time="6.312" errors="0">
+<testcase name="character_select stage - knight not alive" classname="stage_charachter_select.spec.js" time="0.871">
+</testcase>
+<testcase name="character_select stage - mage not alive" classname="stage_charachter_select.spec.js" time="0.809">
+</testcase>
+<testcase name="character_select stage - archer not alive" classname="stage_charachter_select.spec.js" time="0.853">
+</testcase>
+<testcase name="character_select stage - knight has skip_turn effect" classname="stage_charachter_select.spec.js" time="0.81">
+</testcase>
+<testcase name="character_select stage - skip_turn effect removed after character selection" classname="stage_charachter_select.spec.js" time="0.755">
+</testcase>
+<testcase name="character_select stage - no character available shows Skip Turn button" classname="stage_charachter_select.spec.js" time="1.019">
+</testcase>
+<testcase name="character_select stage - Skip Turn button passes turn to next player" classname="stage_charachter_select.spec.js" time="1.195">
+</testcase>
+</testsuite>
+<testsuite name="stage_level_progression.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="chromium" tests="2" failures="2" skipped="0" time="11.543" errors="0">
+<testcase name="card_draw stage - knight draws magic_ball and levels up" classname="stage_level_progression.spec.js" time="5.817">
+<failure message="stage_level_progression.spec.js:12:1 card_draw stage - knight draws magic_ball and levels up" type="FAILURE">
+<![CDATA[  [chromium] › stage_level_progression.spec.js:12:1 › card_draw stage - knight draws magic_ball and levels up 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('[data-player="player1"]').locator('[data-player-cards] [data-character="knight"]')
+    Expected string: "L1"
+    Received string: "אביר דרגה 1+1[2/2]"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('[data-player="player1"]').locator('[data-player-cards] [data-character="knight"]')
+        9 × locator resolved to <div data-level="1" data-effects="" data-character="knight" class="_alive_locbp_64 _card_5nk8a_2 _card_locbp_2 _card-small_locbp_39">…</div>
+          - unexpected value "אביר דרגה 1+1[2/2]"
+
+
+      31 |   const player1Div = page.locator('[data-player="player1"]');
+      32 |   const knightCard = player1Div.locator('[data-player-cards] [data-character="knight"]');
+    > 33 |   await expect(knightCard).toContainText("L1");
+         |                            ^
+      34 |   await expect(knightCard).toContainText("[2/2]");
+      35 |
+      36 |   // Verify magic_ball card is visible
+        at /home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/stage_level_progression.spec.js:33:28
+
+    Error Context: ../test-results/stage_level_progression-ca-ef4e5-ws-magic-ball-and-levels-up-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/stage_level_progression-ca-ef4e5-ws-magic-ball-and-levels-up-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="battle stage - level 2 knight loses and drops to level 1" classname="stage_level_progression.spec.js" time="5.726">
+<failure message="stage_level_progression.spec.js:80:1 battle stage - level 2 knight loses and drops to level 1" type="FAILURE">
+<![CDATA[  [chromium] › stage_level_progression.spec.js:80:1 › battle stage - level 2 knight loses and drops to level 1 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('[data-player="player1"]').locator('[data-player-cards] [data-character="knight"]')
+    Expected string: "L2"
+    Received string: "אביר דרגה 2+1[6/6]"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('[data-player="player1"]').locator('[data-player-cards] [data-character="knight"]')
+        9 × locator resolved to <div data-level="2" data-effects="" data-character="knight" class="_alive_locbp_64 _card_5nk8a_2 _card_locbp_2 _card-small_locbp_39">…</div>
+          - unexpected value "אביר דרגה 2+1[6/6]"
+
+
+      89 |   const player1Div = page.locator('[data-player="player1"]');
+      90 |   const knightCard = player1Div.locator('[data-player-cards] [data-character="knight"]');
+    > 91 |   await expect(knightCard).toContainText("L2");
+         |                            ^
+      92 |   await expect(knightCard).toContainText("[6/6]");
+      93 |
+      94 |   // Screenshot with knight at level 2 before battle ends
+        at /home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/stage_level_progression.spec.js:91:28
+
+    Error Context: ../test-results/stage_level_progression-ba-530ce--loses-and-drops-to-level-1-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/stage_level_progression-ba-530ce--loses-and-drops-to-level-1-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="basic_flow.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="mobile-landscape" tests="1" failures="0" skipped="0" time="12.827" errors="0">
+<testcase name="basic game flow" classname="basic_flow.spec.js" time="12.827">
+</testcase>
+</testsuite>
+<testsuite name="disconnected.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="mobile-landscape" tests="1" failures="0" skipped="0" time="1.896" errors="0">
+<testcase name="disconnected player overlay in players menu" classname="disconnected.spec.js" time="1.896">
+</testcase>
+</testsuite>
+<testsuite name="home.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="mobile-landscape" tests="4" failures="0" skipped="0" time="4.481" errors="0">
+<testcase name="should show error toast when username is empty" classname="home.spec.js" time="1.293">
+</testcase>
+<testcase name="should show error toast when username is only whitespace" classname="home.spec.js" time="1.282">
+</testcase>
+<testcase name="should allow joining game with valid username" classname="home.spec.js" time="0.947">
+</testcase>
+<testcase name="should trim whitespace from username when joining" classname="home.spec.js" time="0.959">
+</testcase>
+</testsuite>
+<testsuite name="minimum_players.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="mobile-landscape" tests="2" failures="0" skipped="0" time="1.048" errors="0">
+<testcase name="minimum player overlay appears with single player" classname="minimum_players.spec.js" time="0.522">
+</testcase>
+<testcase name="minimum player overlay not present with two players" classname="minimum_players.spec.js" time="0.526">
+</testcase>
+</testsuite>
+<testsuite name="players_menu.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="mobile-landscape" tests="1" failures="0" skipped="0" time="1.786" errors="0">
+<testcase name="players menu minified by default with global toggle" classname="players_menu.spec.js" time="1.786">
+</testcase>
+</testsuite>
+<testsuite name="shared_area.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="mobile-landscape" tests="2" failures="0" skipped="0" time="3.682" errors="0">
+<testcase name="shared area dynamic alignment - character selection stage" classname="shared_area.spec.js" time="1.731">
+</testcase>
+<testcase name="shared area dynamic alignment - opponent selection stage" classname="shared_area.spec.js" time="1.951">
+</testcase>
+</testsuite>
+<testsuite name="stage_ability_selection.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="mobile-landscape" tests="3" failures="0" skipped="0" time="3.207" errors="0">
+<testcase name="ability_selection stage - knight (BATTLE_HOWL) skips to opponent_selection" classname="stage_ability_selection.spec.js" time="0.987">
+</testcase>
+<testcase name="ability_selection stage - archer (BOUNCING_ARROW) skips to opponent_selection" classname="stage_ability_selection.spec.js" time="1.089">
+</testcase>
+<testcase name="ability_selection stage - mage (FREEZE) goes to ability_opponent_selection" classname="stage_ability_selection.spec.js" time="1.131">
+</testcase>
+</testsuite>
+<testsuite name="stage_battle.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="mobile-landscape" tests="5" failures="0" skipped="0" time="15.128" errors="0">
+<testcase name="battle stage - player 1 wins" classname="stage_battle.spec.js" time="2.96">
+</testcase>
+<testcase name="battle stage - player 2 wins" classname="stage_battle.spec.js" time="3.036">
+</testcase>
+<testcase name="battle stage - draw with reroll" classname="stage_battle.spec.js" time="2.941">
+</testcase>
+<testcase name="battle stage - reroll effect after loss" classname="stage_battle.spec.js" time="3.147">
+</testcase>
+<testcase name="battle stage - draw with attack bonus effect" classname="stage_battle.spec.js" time="3.044">
+</testcase>
+</testsuite>
+<testsuite name="stage_card_draw.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="mobile-landscape" tests="4" failures="0" skipped="0" time="4.743" errors="0">
+<testcase name="card_draw stage - knight draws metal_armor successfully" classname="stage_card_draw.spec.js" time="1.164">
+</testcase>
+<testcase name="card_draw stage - archer draws sacred_sword (restricted)" classname="stage_card_draw.spec.js" time="0.984">
+</testcase>
+<testcase name="card_draw stage - knight draws golden_apple and heals" classname="stage_card_draw.spec.js" time="1.315">
+</testcase>
+<testcase name="card_draw stage - knight at max health draws golden_apple (no overheal)" classname="stage_card_draw.spec.js" time="1.28">
+</testcase>
+</testsuite>
+<testsuite name="stage_charachter_select.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="mobile-landscape" tests="7" failures="0" skipped="0" time="7.022" errors="0">
+<testcase name="character_select stage - knight not alive" classname="stage_charachter_select.spec.js" time="0.949">
+</testcase>
+<testcase name="character_select stage - mage not alive" classname="stage_charachter_select.spec.js" time="0.917">
+</testcase>
+<testcase name="character_select stage - archer not alive" classname="stage_charachter_select.spec.js" time="0.906">
+</testcase>
+<testcase name="character_select stage - knight has skip_turn effect" classname="stage_charachter_select.spec.js" time="0.931">
+</testcase>
+<testcase name="character_select stage - skip_turn effect removed after character selection" classname="stage_charachter_select.spec.js" time="0.829">
+</testcase>
+<testcase name="character_select stage - no character available shows Skip Turn button" classname="stage_charachter_select.spec.js" time="1.081">
+</testcase>
+<testcase name="character_select stage - Skip Turn button passes turn to next player" classname="stage_charachter_select.spec.js" time="1.409">
+</testcase>
+</testsuite>
+<testsuite name="stage_level_progression.spec.js" timestamp="2026-01-30T09:57:07.946Z" hostname="mobile-landscape" tests="2" failures="2" skipped="0" time="11.448" errors="0">
+<testcase name="card_draw stage - knight draws magic_ball and levels up" classname="stage_level_progression.spec.js" time="5.751">
+<failure message="stage_level_progression.spec.js:12:1 card_draw stage - knight draws magic_ball and levels up" type="FAILURE">
+<![CDATA[  [mobile-landscape] › stage_level_progression.spec.js:12:1 › card_draw stage - knight draws magic_ball and levels up 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('[data-player="player1"]').locator('[data-player-cards] [data-character="knight"]')
+    Expected string: "L1"
+    Received string: "אביר דרגה 1+1[2/2]"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('[data-player="player1"]').locator('[data-player-cards] [data-character="knight"]')
+        9 × locator resolved to <div data-level="1" data-effects="" data-character="knight" class="_alive_locbp_64 _card_5nk8a_2 _card_locbp_2 _card-small_locbp_39">…</div>
+          - unexpected value "אביר דרגה 1+1[2/2]"
+
+
+      31 |   const player1Div = page.locator('[data-player="player1"]');
+      32 |   const knightCard = player1Div.locator('[data-player-cards] [data-character="knight"]');
+    > 33 |   await expect(knightCard).toContainText("L1");
+         |                            ^
+      34 |   await expect(knightCard).toContainText("[2/2]");
+      35 |
+      36 |   // Verify magic_ball card is visible
+        at /home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/stage_level_progression.spec.js:33:28
+
+    Error Context: ../test-results/stage_level_progression-ca-ef4e5-ws-magic-ball-and-levels-up-mobile-landscape/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/stage_level_progression-ca-ef4e5-ws-magic-ball-and-levels-up-mobile-landscape/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="battle stage - level 2 knight loses and drops to level 1" classname="stage_level_progression.spec.js" time="5.697">
+<failure message="stage_level_progression.spec.js:80:1 battle stage - level 2 knight loses and drops to level 1" type="FAILURE">
+<![CDATA[  [mobile-landscape] › stage_level_progression.spec.js:80:1 › battle stage - level 2 knight loses and drops to level 1 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('[data-player="player1"]').locator('[data-player-cards] [data-character="knight"]')
+    Expected string: "L2"
+    Received string: "אביר דרגה 2+1[6/6]"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('[data-player="player1"]').locator('[data-player-cards] [data-character="knight"]')
+        9 × locator resolved to <div data-level="2" data-effects="" data-character="knight" class="_alive_locbp_64 _card_5nk8a_2 _card_locbp_2 _card-small_locbp_39">…</div>
+          - unexpected value "אביר דרגה 2+1[6/6]"
+
+
+      89 |   const player1Div = page.locator('[data-player="player1"]');
+      90 |   const knightCard = player1Div.locator('[data-player-cards] [data-character="knight"]');
+    > 91 |   await expect(knightCard).toContainText("L2");
+         |                            ^
+      92 |   await expect(knightCard).toContainText("[6/6]");
+      93 |
+      94 |   // Screenshot with knight at level 2 before battle ends
+        at /home/runner/work/heroes-of-talisman/heroes-of-talisman/e2e/stage_level_progression.spec.js:91:28
+
+    Error Context: ../test-results/stage_level_progression-ba-530ce--loses-and-drops-to-level-1-mobile-landscape/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/stage_level_progression-ba-530ce--loses-and-drops-to-level-1-mobile-landscape/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
