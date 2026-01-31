@@ -12,18 +12,13 @@ on:
         required: false
         type: boolean
         default: false
-  # schedule:
-  #   # Run daily at midnight UTC
-  #   - cron: '0 0 * * *'
-  push:
-    branches:
-      - gh-pages
+  schedule:
+    # Run every hour
+    - cron: '0 * * * *'
 
 jobs:
   cleanup:
     runs-on: ubuntu-latest
-    # Skip if push was made by github-actions bot to prevent infinite loop
-    if: github.actor != 'github-actions[bot]'
     permissions:
       contents: write
 
