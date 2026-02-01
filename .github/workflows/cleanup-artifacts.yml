@@ -47,6 +47,14 @@ jobs:
           fi
           ./scripts/cleanup-artifacts.sh $ARGS 2>&1 | tee cleanup-output.txt
 
+      # git-filter-repo removes the origin remote even with --partial flag
+      # We need to re-add it before pushing, using the GitHub token for authentication
+      - name: Restore origin remote
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git remote remove origin 2>/dev/null || true
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
       - name: Push changes
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: git push origin gh-pages --force || echo "Nothing to push"
