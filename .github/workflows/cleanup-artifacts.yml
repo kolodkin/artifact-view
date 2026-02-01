@@ -49,11 +49,7 @@ jobs:
 
       - name: Push changes
         if: ${{ github.event.inputs.dry_run != 'true' }}
-        run: |
-          # git-filter-repo removes the origin remote, so we need to re-add it
-          REMOTE_URL="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
-          git remote set-url origin "$REMOTE_URL" 2>/dev/null || git remote add origin "$REMOTE_URL"
-          git push origin gh-pages --force || echo "Nothing to push"
+        run: git push origin gh-pages --force || echo "Nothing to push"
 
       - name: Summary
         if: always()
