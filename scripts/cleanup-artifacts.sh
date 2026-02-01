@@ -1,164 +1,167 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
-# Default values
+# Cleanup old artifact runs from gh-pages branch
+# Usage: ./cleanup-artifacts.sh [--artifact-path PATH] [--keep N] [--dry-run]
+
 DEFAULT_KEEP=10
-DRY_RUN=false
 ARTIFACT_PATH=""
-KEEP_COUNT=""
-
-# Help message
-show_help() {
-    cat << EOF
-Usage: $(basename "$0") [OPTIONS]
-
-Clean up old artifact runs from gh-pages branch.
-
-Options:
-    --help              Show this help message
-    --dry-run           Preview what would be deleted without making changes
-    --keep N            Number of recent runs to keep (default: from config.json or $DEFAULT_KEEP)
-    --artifact-path P   Target a specific path (e.g., project/report-type)
-
-Examples:
-    $(basename "$0") --dry-run
-    $(basename "$0") --keep 5
-    $(basename "$0") --artifact-path heroes-of-talisman/playwright-report
-EOF
-    exit 0
-}
+DRY_RUN="false"
+KEEP_OVERRIDE=""
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
-    case $1 in
-        --help)
-            show_help
-            ;;
-        --dry-run)
-            DRY_RUN=true
-            shift
-            ;;
-        --keep)
-            KEEP_COUNT="$2"
-            shift 2
-            ;;
-        --artifact-path)
-            ARTIFACT_PATH="$2"
-            shift 2
-            ;;
-        *)
-            echo "Unknown option: $1"
-            show_help
-            ;;
-    esac
+  case $1 in
+    --artifact-path)
+      ARTIFACT_PATH="$2"
+      shift 2
+      ;;
+    --keep)
+      KEEP_OVERRIDE="$2"
+      shift 2
+      ;;
+    --dry-run)
+      DRY_RUN="true"
+      shift
+      ;;
+    -h|--help)
+      echo "Usage: $0 [--artifact-path PATH] [--keep N] [--dry-run]"
+      echo ""
+      echo "Options:"
+      echo "  --artifact-path PATH  Target a specific path (e.g., heroes-of-talisman/playwright-report)"
+      echo "  --keep N              Number of runs to keep (overrides config.json)"
+      echo "  --dry-run             Preview what would be deleted without making changes"
+      echo ""
+      echo "Configuration:"
+      echo "  Place a config.json in the project root (e.g., heroes-of-talisman/config.json)"
+      echo "  with {\"keep\": N} to override the default retention count of $DEFAULT_KEEP"
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $1"
+      exit 1
+      ;;
+  esac
 done
 
-# Configure git if in CI environment
-if [[ -n "$GIT_USER_NAME" ]]; then
-    git config user.name "$GIT_USER_NAME"
-    git config user.email "$GIT_USER_EMAIL"
-fi
+# Initialize paths file
+PATHS_FILE=$(mktemp)
+trap "rm -f $PATHS_FILE" EXIT
 
-# Find all project directories or use specified path
-if [[ -n "$ARTIFACT_PATH" ]]; then
-    SEARCH_PATHS=("$ARTIFACT_PATH")
+# Function to process a single artifact directory
+process_artifact_dir() {
+  local artifact_path="$1"
+  local parent_dir=$(dirname "$artifact_path")
+  local config_file="${parent_dir}/config.json"
+  local keep_count=$DEFAULT_KEEP
+
+  # Use --keep override if provided, otherwise read from config
+  if [ -n "$KEEP_OVERRIDE" ]; then
+    keep_count=$KEEP_OVERRIDE
+    echo "Using --keep override: $keep_count"
+  elif [ -f "$config_file" ]; then
+    configured_keep=$(jq -r '.keep // empty' "$config_file" 2>/dev/null || true)
+    if [ -n "$configured_keep" ] && [ "$configured_keep" -ge 0 ] 2>/dev/null; then
+      keep_count=$configured_keep
+      echo "Using configured keep count: $keep_count from $config_file"
+    fi
+  else
+    echo "No config found at $config_file, using default: $keep_count"
+  fi
+
+  # Get all numeric subdirectories, sorted numerically descending
+  local dirs_to_check="$artifact_path"
+  if [ ! -d "$dirs_to_check" ]; then
+    echo "Directory $dirs_to_check does not exist, skipping"
+    return
+  fi
+
+  # Find numeric folders and sort numerically
+  local all_runs=$(find "$dirs_to_check" -maxdepth 1 -mindepth 1 -type d -exec basename {} \; 2>/dev/null | grep -E '^[0-9]+$' | sort -n -r)
+
+  if [ -z "$all_runs" ]; then
+    echo "No numeric run folders found in $artifact_path"
+    return
+  fi
+
+  local total_count=$(echo "$all_runs" | wc -l | tr -d ' ')
+  echo "Found $total_count run folders in $artifact_path"
+
+  # Skip if we have fewer than keep_count
+  if [ "$total_count" -le "$keep_count" ]; then
+    echo "Total runs ($total_count) <= keep count ($keep_count), nothing to delete"
+    return
+  fi
+
+  # Get folders to delete (all except the last keep_count)
+  local to_delete=$(echo "$all_runs" | tail -n +$((keep_count + 1)))
+  local delete_count=$(echo "$to_delete" | wc -l | tr -d ' ')
+
+  echo "Will delete $delete_count old run folders, keeping newest $keep_count"
+
+  for run_num in $to_delete; do
+    local full_path="${artifact_path}/${run_num}"
+    echo "  - $full_path"
+
+    if [ "$DRY_RUN" != "true" ]; then
+      # Remove from working tree
+      rm -rf "$full_path"
+
+      # Track path for git-filter-repo
+      echo "$full_path" >> "$PATHS_FILE"
+    fi
+  done
+}
+
+# If specific path provided, process only that
+if [ -n "$ARTIFACT_PATH" ]; then
+  echo "Processing specified path: $ARTIFACT_PATH"
+  process_artifact_dir "$ARTIFACT_PATH"
 else
-    # Find all directories that contain numbered run folders
-    SEARCH_PATHS=()
-    while IFS= read -r -d '' dir; do
-        # Check if directory contains numbered subdirectories
-        if ls -d "$dir"/[0-9]* >/dev/null 2>&1; then
-            SEARCH_PATHS+=("$dir")
-        fi
-    done < <(find . -mindepth 2 -maxdepth 2 -type d ! -path "./.git/*" ! -path "./scripts/*" -print0 2>/dev/null)
+  # Auto-discover: find all directories that contain numeric subdirectories
+  echo "Auto-discovering artifact directories..."
+
+  # Find potential artifact paths (directories containing numeric subdirs)
+  for potential_parent in $(find . -type d | grep -v '\.git' | grep -E '/[0-9]+$' | xargs -I {} dirname {} | sort -u); do
+    # Remove leading ./
+    clean_path="${potential_parent#./}"
+    echo "Discovered artifact path: $clean_path"
+    process_artifact_dir "$clean_path"
+  done
 fi
 
-PATHS_TO_DELETE=()
+if [ "$DRY_RUN" = "true" ]; then
+  echo ""
+  echo "=== DRY RUN - No changes made ==="
+  exit 0
+fi
 
-for artifact_dir in "${SEARCH_PATHS[@]}"; do
-    # Skip if directory doesn't exist
-    [[ -d "$artifact_dir" ]] || continue
-
-    # Get keep count from config.json or use default
-    project_dir=$(dirname "$artifact_dir")
-    config_file="$project_dir/config.json"
-
-    if [[ -n "$KEEP_COUNT" ]]; then
-        keep=$KEEP_COUNT
-    elif [[ -f "$config_file" ]] && command -v jq &> /dev/null; then
-        keep=$(jq -r '.keep // empty' "$config_file" 2>/dev/null || echo "")
-        [[ -z "$keep" ]] && keep=$DEFAULT_KEEP
-    else
-        keep=$DEFAULT_KEEP
-    fi
-
-    echo "Processing: $artifact_dir (keeping last $keep runs)"
-
-    # Get all run directories, sorted numerically
-    runs=()
-    while IFS= read -r run; do
-        runs+=("$run")
-    done < <(ls -d "$artifact_dir"/[0-9]* 2>/dev/null | sort -t'/' -k3 -n -r)
-
-    total=${#runs[@]}
-
-    if [[ $total -le $keep ]]; then
-        echo "  Found $total runs, keeping all (threshold: $keep)"
-        continue
-    fi
-
-    # Mark runs for deletion (keep the most recent N)
-    delete_count=$((total - keep))
-    echo "  Found $total runs, will delete $delete_count oldest"
-
-    for ((i = keep; i < total; i++)); do
-        run_path="${runs[$i]}"
-        echo "  - Will delete: $run_path"
-        PATHS_TO_DELETE+=("$run_path")
-    done
-done
-
-if [[ ${#PATHS_TO_DELETE[@]} -eq 0 ]]; then
-    echo ""
-    echo "Nothing to clean up."
-    exit 0
+# Check if there are paths to filter
+if [ ! -s "$PATHS_FILE" ]; then
+  echo "No paths to clean from git history"
+  exit 0
 fi
 
 echo ""
-echo "Total paths to delete: ${#PATHS_TO_DELETE[@]}"
+echo "=== Removing deleted paths from git history ==="
 
-if [[ "$DRY_RUN" == "true" ]]; then
-    echo ""
-    echo "[DRY RUN] No changes made."
-    exit 0
-fi
+# Commit the deletions first
+git config user.name "${GIT_USER_NAME:-cleanup-bot}"
+git config user.email "${GIT_USER_EMAIL:-cleanup-bot@users.noreply.github.com}"
 
-# Delete the directories
-for path in "${PATHS_TO_DELETE[@]}"; do
-    echo "Deleting: $path"
-    rm -rf "$path"
-done
-
-# Commit the deletions
 git add -A
-git commit -m "chore: Clean up old artifact runs
+if git diff --cached --quiet; then
+  echo "No changes to commit"
+else
+  git commit -m "chore: cleanup old artifact runs"
+fi
 
-Deleted ${#PATHS_TO_DELETE[@]} old artifact run(s)" || echo "Nothing to commit"
+# Use git-filter-repo to remove paths from history
+echo "Filtering the following paths from history:"
+cat "$PATHS_FILE"
 
-# Remove from git history using git-filter-repo with --partial to preserve origin remote
-echo ""
-echo "Removing deleted paths from git history..."
-
-# Build the path filter arguments
-FILTER_ARGS=()
-for path in "${PATHS_TO_DELETE[@]}"; do
-    # Remove leading ./ if present
-    clean_path="${path#./}"
-    FILTER_ARGS+=("--invert-paths" "--path" "$clean_path")
-done
-
-# Run git-filter-repo with --partial to preserve the origin remote
-git filter-repo --partial --force "${FILTER_ARGS[@]}"
+git filter-repo --invert-paths --paths-from-file "$PATHS_FILE" --partial --force
 
 echo ""
-echo "Cleanup complete!"
+echo "=== Cleanup complete ==="
+echo "Run 'git push origin gh-pages --force' to push changes"
