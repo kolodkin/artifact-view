@@ -1,9 +1,11 @@
 Auto-discovering artifact directories...
 Discovered artifact path: heroes-of-talisman/playwright-report
 No config found at heroes-of-talisman/config.json, using default: 10
-Found 12 run folders in heroes-of-talisman/playwright-report
-Will delete 2 old run folders, keeping newest 10
-  - heroes-of-talisman/playwright-report/410
-  - heroes-of-talisman/playwright-report/409
+Found 14 run folders in heroes-of-talisman/playwright-report
+Will delete 4 old run folders, keeping newest 10
+  - heroes-of-talisman/playwright-report/414
+  - heroes-of-talisman/playwright-report/413
+  - heroes-of-talisman/playwright-report/412
+  - heroes-of-talisman/playwright-report/411
 
 === Removing deleted paths from git history ===
