@@ -1,0 +1,52 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - heading "test mobile-landscape disconnected player overlay in players menu" [level=1] [ref=e7]
+        - generic [ref=e8]: player1
+        - generic [ref=e9]: "שלב: בחירת דמות"
+        - generic [ref=e10]: "משחק: player1"
+      - generic [ref=e11]:
+        - link [ref=e12] [cursor=pointer]:
+          - /url: /presets
+          - img [ref=e13] [cursor=pointer]
+        - link [ref=e15] [cursor=pointer]:
+          - /url: /
+          - img [ref=e16] [cursor=pointer]
+        - generic [ref=e19]: Heroes of Talisman
+  - generic [ref=e21]:
+    - generic [ref=e23]: צריך לפחות שני שחקנים במשחק כדי שניתן יהיה להתחיל את המשחק
+    - generic: תורך
+    - button "Expand players menu" [ref=e24] [cursor=pointer]: ">"
+    - generic [ref=e25]:
+      - heading "בחר דמות" [level=2] [ref=e26]
+      - generic [ref=e27]:
+        - button "בחר" [ref=e29] [cursor=pointer]
+        - generic [ref=e33]:
+          - generic [ref=e35]:
+            - img "mage" [ref=e36]
+            - paragraph [ref=e37]: קוסם דרגה 1
+            - img [ref=e39]
+            - generic [ref=e45]:
+              - img [ref=e46]
+              - generic [ref=e48]: "[2/2]"
+          - generic [ref=e50]:
+            - img "archer" [ref=e51]
+            - paragraph [ref=e52]: קשת דרגה 1
+            - img [ref=e54]
+            - generic [ref=e60]:
+              - img [ref=e61]
+              - generic [ref=e63]: "[3/3]"
+          - generic [ref=e65]:
+            - img "knight" [ref=e66]
+            - paragraph [ref=e67]: אביר דרגה 1
+            - generic [ref=e68]:
+              - img [ref=e69]
+              - generic [ref=e75]: "+1"
+            - generic [ref=e76]:
+              - img [ref=e77]
+              - generic [ref=e79]: "[2/2]"
+```
