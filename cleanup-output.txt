@@ -7,7 +7,7 @@ Discovered artifact path: queryview-/e2e-report
 No config found at queryview-/config.json, using default: 10
 Found 12 run folders in queryview-/e2e-report
 Will delete 2 old run folders, keeping newest 10
-  - queryview-/e2e-report/70
-  - queryview-/e2e-report/69
+  - queryview-/e2e-report/73
+  - queryview-/e2e-report/71
 
 === Removing deleted paths from git history ===
