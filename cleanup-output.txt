@@ -5,9 +5,15 @@ Found 10 run folders in heroes-of-talisman/playwright-report
 Total runs (10) <= keep count (10), nothing to delete
 Discovered artifact path: queryview-/e2e-report
 No config found at queryview-/config.json, using default: 10
-Found 12 run folders in queryview-/e2e-report
-Will delete 2 old run folders, keeping newest 10
-  - queryview-/e2e-report/453
-  - queryview-/e2e-report/451
+Found 18 run folders in queryview-/e2e-report
+Will delete 8 old run folders, keeping newest 10
+  - queryview-/e2e-report/462
+  - queryview-/e2e-report/461
+  - queryview-/e2e-report/460
+  - queryview-/e2e-report/459
+  - queryview-/e2e-report/458
+  - queryview-/e2e-report/457
+  - queryview-/e2e-report/455
+  - queryview-/e2e-report/454
 
 === Removing deleted paths from git history ===
